@@ -1,0 +1,175 @@
+# Go语言从入门到实战
+
+## 1. Go语言基本语法与使用
+
+### 1.1 变量
+
+#### 1.1.1 声明变量
+
+变量声明的格式
+
+1. 标准格式
+
+    ```go
+    var 变量名 变量类型
+    ```
+
+2. 批量格式
+
+    ```go
+    var (
+        a int
+        b string
+        c [] float32
+        d func() bool
+        e struct {
+            x int
+        }
+
+    )
+
+    ```
+
+#### 1.1.2 初始化变量
+
+Go语言在声明变量时，自动对变量的内存区进行初始化操作。每个变量会初始化其类型的默认值，例如：
+
+- 整型和浮点型变量的默认值为0
+- 字符串变量的默认值为空字符串
+- 布尔型变量的默认为book
+- 切片、函数、指针变量的默认为nil
+
+声明变量的格式
+
+1. 标准格式
+
+    ```go
+    var 变量名 类型 = 表达式
+
+    var num int = 2
+    ```
+
+2. 编译器推导类型格式
+
+    ```go
+    var 变量名 = 表达式
+
+    var num = 2
+    ```
+
+3. 短变量声明初始化
+
+    此类推导声明写法的左值变量必须是没有定义过的变量。若定义过，将会发生编译错误。
+
+    ```go
+    num := 2
+    ```
+
+#### 1.1.3 多个变量同时赋值
+
+多重赋值时，变量的左值和右值按从左到右的顺序赋值。多重赋值在Go语言的错误处理和函数返回值中会大量的使用。
+
+```go
+var a int = 100
+var b int = 200
+b, a = a, b
+```
+
+#### 1.1.4 匿名变量
+
+在使用多重赋值时，如果不需要在左值中接收变量，可以使用匿名变量。匿名变量的表现时一个 "`_`"下划线。
+
+```go
+
+func GetData()(int, int){
+    return 100, 200
+}
+
+a, _ := GetData()
+
+_, b := GetData()
+```
+
+### 1.2 数据类型
+
+Go语言中有丰富的数据类型，除了基本的整型、浮点型、布尔型、字符串外，还有切片、结构体、函数、map、通道（channel）等。
+
+#### 1.2.1 整型
+
+整型分为两大类
+
+- 按长度分为：int8、int16、int32、int64
+- 对应的无符号整型： uint8、uint16、uint32、uint64
+
+uint8 -> byte型
+
+int16 -> C语言的 short型
+
+int64 -> C语言的 long型
+
+1. 自动匹配平台的int和uint
+
+    Go语言自动匹配特定平台整型长度的类型———— int和uint
+
+2. 哪些情况下使用int和uint
+
+    逻辑对整型范围没有特殊需求。
+
+#### 1.2.2 浮点型
+
+Go语言支持两种浮点数 float32和flaot64.
+
+- float32
+
+    最大范围为3.4e38，可以使用常量定义 `math.MaxFloat32`
+
+- float64
+
+     最大范围为1.8の08，可以使用常量定义 `math.MaxFloat64`
+
+#### 1.2.3 输出正弦函数
+
+```GO
+package main
+
+import (
+	"image"
+	"image/color"
+	"image/png"
+	"log"
+	"math"
+	"os"
+)
+
+func gen_Sin() {
+	// 图片大小
+	const size = 300
+
+	// 根据给定大小创建灰度图
+	pic := image.NewGray(image.Rect(0, 0, size, size))
+
+	for x := 0; x < size; x++ {
+		for y := 0; y < size; y++ {
+			pic.SetGray(x, y, color.Gray{255})
+		}
+	}
+
+	for x := 0; x < size; x++ {
+		// sin 值的范围 0 - 2Pi 之间
+		s := float64(x) * 2 * math.Pi / size
+		y := size/2 - math.Sin(s)*size/2
+		pic.SetGray(x, int(y), color.Gray{0})
+	}
+
+	file, err := os.Create("sin.png")
+	if err != nil {
+		log.Fatal("Create file failed \n", err)
+	}
+	png.Encode(file, pic)
+	file.Close()
+
+}
+func main() {
+	gen_Sin()
+}
+```
