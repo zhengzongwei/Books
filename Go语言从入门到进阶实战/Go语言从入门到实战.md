@@ -237,9 +237,10 @@ Go语言的字符有以下几种
         
     }
 
-    // 结果
-    // 97 uint8
-    // 20320 int32
+    """
+    97 uint8
+    20320 int32
+    """
     ```
 
 #### 1.2.7 切片
@@ -308,6 +309,83 @@ int16: 0x 54ff 21759
 3
 """
 ```
+
+### 1.4 指针
+
+- 类型指针
+
+    允许对这个指针类型的数据进行修改。传递数据使用指针，而无需拷贝数据，类型指针不能进行编译和运算
+
+- 切片
+
+    指向起始于元素的原始指针、元素数量和容量组成。
+
+#### 1.4.1 指针地址和指针类型
+
+每个变量在运行时都拥有一个地址，这个地址代表变量在内存中的位置。GO语言中使用`&`操作符放在变量的前面对变量进行”取地址“操作。
+
+```go
+ptr := &v // v的类型为T
+```
+
+v代表被取地址的变量，被取地址的v使用ptr变量进行接收，ptr的类型就为”*T“，称做T的指针类型。”*“代表指针。
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+
+func main()  {
+	var cat int = 1
+	var str string = "banana"
+
+	fmt.Printf("%p %p", &cat, &str)
+}
+
+"""
+0xc0000ba000 0xc00009e210
+"""
+```
+
+#### 1.4.2 从指针获取指针指向的值
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	var house = "Malibu Point 10086"
+	ptr := &house
+
+	// 指针类型
+	fmt.Printf("ptr type %T\n", ptr)
+	// 指针地址
+	fmt.Printf("ptr %p\n", ptr)
+
+	// 指针取值
+	value := *ptr
+
+	fmt.Printf("value type %T\n", value)
+
+	fmt.Printf("value %s\n", value)
+
+}
+
+"""
+ptr type *string
+ptr 0xc000010250
+value type string
+value Malibu Point 10086
+"""
+
+```
+
 
 
 
