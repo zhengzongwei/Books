@@ -386,8 +386,67 @@ value Malibu Point 10086
 
 ```
 
+#### 1.4.3 使用指针修改值
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+func swap(a, b *int) {
+	// 获取a指针的值
+	t := *a
+
+	// 把指针b的值，赋值给a指向的变量
+	*a = *b
+
+	// 将a指针的值赋值给b指针指向的变量
+	*b = t
+
+	// 错误示范
+	// b, a = a, b // 结果 x，y的值不会变。
+}
+func main() {
+	x, y := 1, 2
+	swap(&x, &y)
+	fmt.Println(x, y)
+
+}
+
+// 2, 1
+```
+
+#### 1.4.4 使用指针变量获取命令行的输入信息
+
+```go
+package main
+
+import (
+	"flag"
+	"fmt"
+)
 
 
 
+var mode = flag.String("mode","","process mode")
+func main()  {
+	
+	flag.Parse()
+
+	fmt.Println(*mode)
+}
+
+// go run 1.4.4-使用指针变量获取命令行的输入信息.go --mode=kkk
+```
 
 
+#### 1.4.5 创建指针的另外一种方法——new()函数
+
+```go
+str := new(string)
+*str = "ninja"
+
+fmt.Println(*str)
+```
