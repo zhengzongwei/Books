@@ -450,3 +450,55 @@ str := new(string)
 
 fmt.Println(*str)
 ```
+
+### 1.5 变量生命期——变量能够使用的代码范围
+
+#### 1.5.1 栈
+
+栈（Stack）是一种拥有特殊规则的线性表数据结构
+
+```go
+package main
+
+import "fmt"
+
+func calc(a, b int) int {
+	var c int
+	c = a * b
+	var x int
+	x = c * 10
+	return x
+}
+func main() {
+	fmt.Println(calc(3, 4))
+}
+```
+
+#### 1.5.3 变量逃逸
+
+```go
+package main
+
+import "fmt"
+
+func dummy(b int)  int{
+	var c int
+	c = b
+	return c
+}
+
+func void(){
+
+}
+func main(){
+	var a int
+	void()
+
+	fmt.Println(a, dummy(0))
+}
+
+// go run --gcflags "-m -l" 
+```
+
+
+
