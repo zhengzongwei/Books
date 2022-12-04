@@ -650,3 +650,38 @@ func main()  {
 }
 ```
 
+## 2. 容器：存储和组织数据的方式
+
+### 2.1 数组
+
+数组是一段**固定长度的连续内存区域**
+
+在Go语言中，数组从声明时就确定，使用时可以修改数组成员，但时数组大小不可变化。
+
+#### 2.1.1 声明数组
+
+```go
+var 数组变量名 [元素数量]T
+
+```
+
+#### 2.1.2 遍历数组
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	// var team [3]string
+	// team[0] = "hammer"
+	// team[1] = "soldier"
+	// team[2] = "mum"
+	var team = [...]string{"hammer", "soldier", "mum"}
+	for k, v := range team {
+		fmt.Printf("k %d v %s\n", k, v)
+	}
+
+}
+```
+
