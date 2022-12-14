@@ -685,3 +685,36 @@ func main() {
 }
 ```
 
+### 2.2 切片（slice）
+
+Go语言切片的内部结构包含地址、大小、和容量。切片一般用于快速的操作一块数据集合。
+
+#### 2.2.1 声明切片
+```go
+package main
+
+import "fmt"
+
+func main() {
+	// 声明字符串切片
+	var strList [] string
+
+
+	// 声明整型切片
+	var numList [] int
+
+	var numEmpty  = [] int{}
+
+	// 输出3个切片
+	fmt.Println(strList, numList, numEmpty)
+
+	fmt.Println(len(strList), len(numList), len(numEmpty))
+
+	fmt.Println(strList == nil)
+
+	fmt.Println(numList == nil)
+
+	fmt.Println(numEmpty == nil)
+}
+```
+   
