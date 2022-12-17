@@ -717,4 +717,28 @@ func main() {
 	fmt.Println(numEmpty == nil)
 }
 ```
-   
+
+#### 2.2.2 切片的使用
+
+1. 使用make() 函数构造切片
+
+```go
+make([]T, size, cap)
+// T： 切片的元素类型
+// size：为这个类型分配多少元素
+// cap：预分配的元素数量
+```
+2. 使用append()为切片添加元素
+```go
+// 添加多个元素
+var car []string
+car = append(car, "LINK%CO", "Sniper", "Monk")
+
+// 添加切片
+team := []string{"Pig", "Chicken"}
+
+car = append(car, team...)
+
+fmt.Println(car)
+```
+
