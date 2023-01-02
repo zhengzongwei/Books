@@ -742,3 +742,37 @@ car = append(car, team...)
 fmt.Println(car)
 ```
 
+## 2.3 映射(MAP)
+
+Go语言提供的映射关系容器为map。map使用散列表(hash)实现
+
+### 2.3.1 添加关联到map并访问关联和数据
+
+1. map定义
+
+	map[KeyType]ValueType
+
+
+## 2.4 列表
+
+1. list定义
+	```go
+	变量名 := list.new()
+
+	var 变量名 list.List
+	```
+### 2.4.1 在列表中插入元素
+
+1. 在队列前方插入 `PushFront`
+
+2. 在队列后方插入 `PushBack`
+
+	```go
+	l := list.New()
+	l.PushBack("fist")
+	l.PushFront(67)
+
+	```
+
+
+
